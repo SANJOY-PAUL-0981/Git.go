@@ -1,8 +1,6 @@
 package main
 
-import (
-	"gitgo/cmd"
-)
+import "gitgo/cmd"
 
 func main() {
 	cmd.Execute()
