@@ -1,0 +1,14 @@
+# Binaries
+gitgo
+gitgo.exe
+
+# Build artifacts
+*.out
+
+# Dependency dirs
+vendor/
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
