@@ -6,34 +6,34 @@ import (
 	"path/filepath"
 )
 
-func InitRepo() {
+func InitRepo() error {
 	DirName := ".gitgo"
 
 	// .gitgo dir creation
 	if err := os.Mkdir(DirName, 0755); err != nil && !os.IsExist(err) {
 		fmt.Println("Error creating .gitgo: ", err)
-		return
+		return err
 	}
 
 	//.gitgo/objects dir
 	ObjectsPath := filepath.Join(DirName, "objects")
 	if err := os.Mkdir(ObjectsPath, 0755); err != nil && !os.IsExist(err) {
 		fmt.Println("Error creating objects: ", err)
-		return
+		return err
 	}
 
 	//.gitgo/refs dir
 	RefsPath := filepath.Join(DirName, "refs")
 	if err := os.Mkdir(RefsPath, 0755); err != nil && !os.IsExist(err) {
 		fmt.Println("Error creating refs: ", err)
-		return
+		return err
 	}
 
 	// .gitgo/refs/heads dir
 	Refs_HeadsPath := filepath.Join(RefsPath, "heads")
 	if err := os.Mkdir(Refs_HeadsPath, 0755); err != nil && !os.IsExist(err) {
 		fmt.Println("Error creating refs: ", err)
-		return
+		return err
 	}
 
 	// HEAD file
@@ -43,7 +43,7 @@ func InitRepo() {
 	if _, err := os.Stat(HeadFile); os.IsNotExist(err) {
 		if err := os.WriteFile(HeadFile, []byte("ref: refs/heads/master"), 0644); err != nil {
 			fmt.Println("Error creating HEAD: ", err)
-			return
+			return err
 		}
 	}
 
@@ -52,6 +52,9 @@ func InitRepo() {
 	if _, err := os.Stat(IndexFile); os.IsNotExist(err) {
 		if err := os.WriteFile(IndexFile, []byte(""), 0644); err != nil {
 			fmt.Println("Error creating the index: ", err)
+			return err
 		}
 	}
+
+	return nil
 }
